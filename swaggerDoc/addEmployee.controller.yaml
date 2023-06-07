@@ -1,0 +1,190 @@
+paths:
+  /addEmployee:
+    post:
+      description: function to add employees
+      tags:
+        - employee
+      parameters:
+        - name: Data
+          in: body
+          description: Employee details
+          schema:
+            type: object
+            properties:
+              firstName:
+                type: string
+              lastName:
+                type: string
+              email:
+                type: string
+              address:
+                type: object
+                properties:
+                  city:
+                    type: string
+                  doorNumber:
+                    type: integer
+            example:
+                  {
+                    "firstName": "Sharn",
+                    "lastName": "Simon",
+                    "email": "sharnjackson2002@gmail.com",
+                    "address": {
+                      "city": "Ngl",
+                      "doorNumber": "25"
+                    }
+                  }  
+      responses:
+        '200':
+          description: employee created successfully
+          schema:
+            type: object
+            properties:
+              firstName:
+                type: string
+              lastName:
+                type: string
+              email:
+                type: string
+              address:
+                type: object
+                properties:
+                  city:
+                    type: string
+                  doorNumber:
+                    type: integer
+            example:
+              {
+                "id": 1,
+                "firstName": "Sharn",
+                "lastName": "Simon",
+                "email": "sharnjackson2002@gmail.com",
+                "address": {
+                  "city": "Ngl",
+                  "doorNumber": "25"
+                }
+              }
+
+        '422':
+          description: employee not created
+          schema:
+            type: object
+            properties:
+              success:
+                type: string
+                default: false
+              error:
+                type: string
+
+
+  /addBulkEmployee:
+    post:
+      description: add many employee
+      tags:
+        - bulk employee
+      parameters:
+        - name: Data
+          in: body
+          description: bulk employee
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    firstName:
+                      type: string
+                    lastName:
+                      type: string
+                    email:
+                      type: string
+                    address:
+                      type: object
+                      properties:
+                        city:
+                          type: string
+                        doorNumber:
+                          type: integer
+            example: 
+              {
+                data: [{"id": 1,
+                  "firstName": "Sharn",
+                  "lastName": "Simon",
+                  "email": "sharnjackson2002@gmail.com",
+                  "address": {
+                    "city": "Ngl",
+                    "doorNumber": "25"
+                  }},
+                  {"id": 2,
+                  "firstName": "Stein",
+                  "lastName": "Simon",
+                  "email": "steinjackson2002@gmail.com",
+                  "address": {
+                    "city": "Ngl",
+                    "doorNumber": "25"
+                  }}
+                  ]
+              }        
+      responses:
+        '200':
+          description: Bulk create successful
+          schema: 
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    firstName:
+                      type: string
+                    lastName:
+                      type: string
+                    email:
+                      type: string
+                    address:
+                      type: object
+                      properties:
+                        city:
+                          type: string
+                        doorNumber:
+                          type: integer
+            example: 
+              {
+                data: [{"id": 1,
+                  "firstName": "Sharn",
+                  "lastName": "Simon",
+                  "email": "sharnjackson2002@gmail.com",
+                  "address": {
+                    "city": "Ngl",
+                    "doorNumber": "25"
+                  },
+                  "createdAt": "2023-05-09T09:13:58.443Z",
+                  "updatedAt": "2023-05-09T09:13:58.443Z"
+                  },
+                  {"id": 2,
+                  "firstName": "Stein",
+                  "lastName": "Simon",
+                  "email": "steinjackson2002@gmail.com",
+                  "address": {
+                    "city": "Ngl",
+                    "doorNumber": "25"
+                  },
+                  "createdAt": "2023-05-09T09:13:58.443Z",
+                  "updatedAt": "2023-05-09T09:13:58.443Z"
+                  }
+                  ]
+              }  
+        '422':
+          description: employee not created
+          schema:
+            type: object
+            properties:
+              success:
+                type: string
+                default: false
+              error:
+                type: string
+
